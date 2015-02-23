@@ -19,6 +19,8 @@ public class Teste {
 		// Centralizando a janela
 		test.setLocationRelativeTo(null);
 
+		// Fabio
+		
 //		
 //		@SuppressWarnings("resource")
 //		Scanner input = new Scanner(System.in);
