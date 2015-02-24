@@ -195,13 +195,10 @@ public class Principal extends JFrame {
                 }
 			}
 		});
+		
+
 	}
 	
-	public void pesquisar() {
-		
-		
-	}
-
 	public static void main(String[] args) {
 
 		Principal principal = new Principal();
@@ -211,7 +208,9 @@ public class Principal extends JFrame {
 		// Centralizando a janela
 		principal.setLocationRelativeTo(null);
 		
+		principal.table.requestFocus();
 		
+		principal.table.setRowSelectionInterval(0, 0);
 		
 		
 	}
