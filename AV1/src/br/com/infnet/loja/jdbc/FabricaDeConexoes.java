@@ -22,9 +22,9 @@ public final class FabricaDeConexoes {
                 Class.forName("com.mysql.jdbc.Driver");
 
                 //Passo 2: configurar.
-                String url = "jdbc:mysql://localhost:3306/bd_loja_veiculos";
+                String url = "jdbc:mysql://localhost:3307/bd_loja_veiculos";
                 String usr = "root";
-                String pwd = "";
+                String pwd = "1234qwer.";
 
                 //Passo 3: conectar.
                 con = DriverManager.getConnection(url, usr, pwd);
