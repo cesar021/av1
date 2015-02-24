@@ -208,6 +208,8 @@ public class Principal extends JFrame {
 		// Centralizando a janela
 		principal.setLocationRelativeTo(null);
 		
+		
+		// Mudando o foco para a table
 		principal.table.requestFocus();
 		
 		principal.table.setRowSelectionInterval(0, 0);
