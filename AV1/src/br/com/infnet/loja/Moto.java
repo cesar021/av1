@@ -1,6 +1,14 @@
 
 package br.com.infnet.loja;
 
+import java.util.ArrayList;
+
+import javax.swing.JComboBox;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import DAO.MotoDAO;
+
 public class Moto {
     private int id;
     private String chassi;
@@ -135,6 +143,46 @@ public class Moto {
         this.preco = preco;
     }
     
+    public static void table_modelo(DefaultTableModel modelo, JComboBox combo) {
+
+    	String[] itens = { "ID", "Chassi", "Montadora", "Modelo", "Tipo", "Cor", "Cilindrada", "Tanque", "Preço" };
+    	
+		if (combo != null) {
+    		
+    		combo.removeAllItems();
+    		
+    		for ( String item : itens ) {
+    		
+    			modelo.addColumn(item);
+    			combo.addItem(item);
+    			
+    		}
+    		
+    	}
+    	
+    }
     
+    public static void table_lista(DefaultTableModel modelo) {
+
+		MotoDAO motoDAO = new MotoDAO();
+				
+		ArrayList<Moto> lista;
+		try {
+			lista = motoDAO.listar();
+			for (Moto m : lista) {
+
+				modelo.addRow(new Object[] { m.getId(),m.getChassi(),
+						m.getMontadora(), m.getModelo(), m.getTipo(),
+						m.getCor(), m.getCilindrada(), m.getTanque(),
+						m.getPreco() });
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Exception -> Moto listar()");
+			e.printStackTrace();
+		}
+    	
+    }
     
 }

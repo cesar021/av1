@@ -1,6 +1,14 @@
 
 package br.com.infnet.loja;
 
+import java.util.ArrayList;
+
+import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
+
+import DAO.CarroDAO;
+import DAO.MotoDAO;
+
 public class Carro {
     
 	private int id;
@@ -141,7 +149,47 @@ public class Carro {
         this.preco = preco;
     }
     
+    public static void table_modelo(DefaultTableModel modelo, JComboBox combo) {
+
+    	String[] itens = { "ID", "Chassi", "Montadora", "Modelo", "Tipo", "Cor", "Motorização", "Cambio", "Preço" };
+    	
+    	if (combo != null) {
+    		
+    		combo.removeAllItems();
+    		
+    		for ( String item : itens ) {
+    		
+    			modelo.addColumn(item);
+    			combo.addItem(item);
+    			
+    		}
+    		
+    	}
+    }
     
+    
+    
+    public static void table_lista(DefaultTableModel modelo) {
+
+    	CarroDAO carroDAO = new CarroDAO();
+		
+		ArrayList<Carro> lista;
+		try {
+			lista = carroDAO.listar();
+			for (Carro c : lista) {
+
+				modelo.addRow(new Object[] { c.getId(), c.getChassi(),
+						c.getMontadora(), c.getModelo(), c.getTipo(),
+						c.getCor(), c.getMotorizacao(), c.getCambio(),
+						c.getPreco() });
+
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    }    
     
     
 }
