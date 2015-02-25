@@ -3,7 +3,6 @@ package br.com.infnet.view;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JMenuBar;
 
@@ -59,38 +58,8 @@ public class MotoManter extends JDialog {
 					moto.setModelo(txtModelo.getText());
 					moto.setTipo(txtTipo.getText());
 					moto.setCor(txtCor.getText());
-					
-					try {
-						moto.setCilindrada(Integer.parseInt(txtCilindrada.getText()));
-						
-					} catch (Exception ex) {
-						
-						
-						JOptionPane op = new JOptionPane("Cilindrada inválida !",JOptionPane.INFORMATION_MESSAGE);
-	                     JDialog dialog = op.createDialog("ERRO");
-	                     dialog.setAlwaysOnTop(true);
-	                     dialog.setModal(true);
-	                     dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);      
-	                     dialog.setVisible(true);
-						
-						return;
-					}
-					
-					try {
-						moto.setTanque(Integer.parseInt(txtTanque.getText()));
-					} catch (Exception ex) {
-						
-						
-						JOptionPane op = new JOptionPane("Tanque inválido !",JOptionPane.INFORMATION_MESSAGE);
-	                     JDialog dialog = op.createDialog("ERRO");
-	                     dialog.setAlwaysOnTop(true);
-	                     dialog.setModal(true);
-	                     dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);      
-	                     dialog.setVisible(true);
-						
-						return;
-					}
-					
+					moto.setCilindrada(Integer.parseInt(txtCilindrada.getText()));
+					moto.setTanque(Integer.parseInt(txtTanque.getText()));
 					moto.setPreco(Float.parseFloat(txtPreco.getText()));
 
 					try {
@@ -115,36 +84,8 @@ public class MotoManter extends JDialog {
 					moto.setModelo(txtModelo.getText());
 					moto.setTipo(txtTipo.getText());
 					moto.setCor(txtCor.getText());
-					try {
-						moto.setCilindrada(Integer.parseInt(txtCilindrada.getText()));
-						
-					} catch (Exception ex) {
-						
-						
-						JOptionPane op = new JOptionPane("Cilindrada inválida !",JOptionPane.INFORMATION_MESSAGE);
-	                     JDialog dialog = op.createDialog("ERRO");
-	                     dialog.setAlwaysOnTop(true);
-	                     dialog.setModal(true);
-	                     dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);      
-	                     dialog.setVisible(true);
-						
-						return;
-					}
-					
-					try {
-						moto.setTanque(Integer.parseInt(txtTanque.getText()));
-					} catch (Exception ex) {
-						
-						
-						JOptionPane op = new JOptionPane("Tanque inválido !",JOptionPane.INFORMATION_MESSAGE);
-	                     JDialog dialog = op.createDialog("ERRO");
-	                     dialog.setAlwaysOnTop(true);
-	                     dialog.setModal(true);
-	                     dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);      
-	                     dialog.setVisible(true);
-						
-						return;
-					}
+					moto.setCilindrada(Integer.parseInt(txtCilindrada.getText()));
+					moto.setTanque(Integer.parseInt(txtTanque.getText()));
 					moto.setPreco(Float.parseFloat(txtPreco.getText()));
 					
 					try {

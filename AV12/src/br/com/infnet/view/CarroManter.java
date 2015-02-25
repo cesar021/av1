@@ -3,7 +3,6 @@ package br.com.infnet.view;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JMenuBar;
 
@@ -59,39 +58,9 @@ public class CarroManter extends JDialog {
 					carro.setModelo(txtModelo.getText());
 					carro.setTipo(txtTipo.getText());
 					carro.setCor(txtCor.getText());
-					
-					try {
-						carro.setMotorizacao(Float.parseFloat(txtMotorizacao.getText()));
-					} catch (Exception ex) {
-						
-						
-						JOptionPane op = new JOptionPane("Motorização inválida !",JOptionPane.INFORMATION_MESSAGE);
-	                     JDialog dialog = op.createDialog("ERRO");
-	                     dialog.setAlwaysOnTop(true);
-	                     dialog.setModal(true);
-	                     dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);      
-	                     dialog.setVisible(true);
-						
-						return;
-					}
-					
+					carro.setMotorizacao(Float.parseFloat(txtMotorizacao.getText()));
 					carro.setCambio(txtCambio.getText());
-					
-					try {
-						carro.setPreco(Float.parseFloat(txtPreco.getText()));
-					} catch (Exception ex) {
-						
-						
-						JOptionPane op = new JOptionPane("Preço inválido !",JOptionPane.INFORMATION_MESSAGE);
-	                     JDialog dialog = op.createDialog("ERRO");
-	                     dialog.setAlwaysOnTop(true);
-	                     dialog.setModal(true);
-	                     dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);      
-	                     dialog.setVisible(true);
-						
-						return;
-					}
-					
+					carro.setPreco(Float.parseFloat(txtPreco.getText()));
 
 					try {
 						CarroDAO.adicionarCarro(carro);
