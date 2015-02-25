@@ -11,6 +11,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import DAO.CarroDAO;
+import DAO.MotoDAO;
 import br.com.infnet.loja.Carro;
 import br.com.infnet.loja.Moto;
 
@@ -50,6 +51,7 @@ public class Principal extends JFrame {
 	final TableRowSorter<TableModel> sorter_Carro = new TableRowSorter<TableModel>(modeloCarro);
 	
 	private static DefaultTableModel modeloMoto = new DefaultTableModel();
+	final TableRowSorter<TableModel> sorter_Moto = new TableRowSorter<TableModel>(modeloMoto);
 	
 	private JTable table;
 	private JTable table_Moto;
@@ -92,6 +94,9 @@ public class Principal extends JFrame {
 		panel.add(scrollPane);
 		
 		table_Moto = new JTable(modeloMoto);
+		
+		table_Moto.setRowSorter(sorter_Moto);
+		
 		scrollPane.setViewportView(table_Moto);
 		
 		JPanel panel_1 = new JPanel();
@@ -168,14 +173,26 @@ public class Principal extends JFrame {
 		mnNewMenu_Cadastrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				
-				CarroManter carroManter = new CarroManter(null);
-				
-				carroManter.setLocationRelativeTo(null);
-				
-				carroManter.setVisible(true);
-				
-				
+			
+				// tabbedPane = 0 -> Carro e 1 -> Moto
+				if ( tabbedPane.getSelectedIndex() == 0 ) {
+					CarroManter carroManter = new CarroManter(null);
+					
+					carroManter.setLocationRelativeTo(null);
+					
+					carroManter.setVisible(true);
+				}
+				else {
+
+					MotoManter motoManter = new MotoManter(null);
+					
+					motoManter.setLocationRelativeTo(null);
+					
+					motoManter.setVisible(true);
+
+					
+				}
+			
 			}
 		});
 		
@@ -187,35 +204,73 @@ public class Principal extends JFrame {
 		mnNewMenu_Alterar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				Carro carro = new Carro();
-				
-				carro.setId(Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 0).toString()));
-				carro.setChassi(table.getModel().getValueAt(table.getSelectedRow(), 1).toString());
-				carro.setMontadora(table.getModel().getValueAt(table.getSelectedRow(), 2).toString());
-				carro.setModelo(table.getModel().getValueAt(table.getSelectedRow(), 3).toString());
-				carro.setTipo(table.getModel().getValueAt(table.getSelectedRow(), 4).toString());
-				carro.setCor(table.getModel().getValueAt(table.getSelectedRow(), 5).toString());
-				
-				try {
-					carro.setMotorizacao(Float.parseFloat(table.getModel().getValueAt(table.getSelectedRow(), 6).toString()));
-				} catch (Exception ex) {
-					carro.setMotorizacao(0);
+			
+				// tabbedPane = 0 -> Carro e 1 -> Moto
+				if ( tabbedPane.getSelectedIndex() == 0 ) {
+					Carro carro = new Carro();
+					
+					carro.setId(Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 0).toString()));
+					carro.setChassi(table.getModel().getValueAt(table.getSelectedRow(), 1).toString());
+					carro.setMontadora(table.getModel().getValueAt(table.getSelectedRow(), 2).toString());
+					carro.setModelo(table.getModel().getValueAt(table.getSelectedRow(), 3).toString());
+					carro.setTipo(table.getModel().getValueAt(table.getSelectedRow(), 4).toString());
+					carro.setCor(table.getModel().getValueAt(table.getSelectedRow(), 5).toString());
+					
+					try {
+						carro.setMotorizacao(Float.parseFloat(table.getModel().getValueAt(table.getSelectedRow(), 6).toString()));
+					} catch (Exception ex) {
+						carro.setMotorizacao(0);
+					}
+					
+					carro.setCambio(table.getModel().getValueAt(table.getSelectedRow(), 7).toString());
+					
+					try {
+						carro.setPreco(Float.parseFloat(table.getModel().getValueAt(table.getSelectedRow(), 8).toString()));
+					} catch (Exception ex) {
+						carro.setPreco(0);
+					}
+					
+					CarroManter carroManter = new CarroManter(carro);
+					
+					carroManter.setLocationRelativeTo(null);
+					
+					carroManter.setVisible(true);
+				}
+				else {
+					Moto moto = new Moto();
+					
+					moto.setId(Integer.parseInt(table_Moto.getModel().getValueAt(table_Moto.getSelectedRow(), 0).toString()));
+					moto.setChassi(table_Moto.getModel().getValueAt(table_Moto.getSelectedRow(), 1).toString());
+					moto.setMontadora(table_Moto.getModel().getValueAt(table_Moto.getSelectedRow(), 2).toString());
+					moto.setModelo(table_Moto.getModel().getValueAt(table_Moto.getSelectedRow(), 3).toString());
+					moto.setTipo(table_Moto.getModel().getValueAt(table_Moto.getSelectedRow(), 4).toString());
+					moto.setCor(table_Moto.getModel().getValueAt(table_Moto.getSelectedRow(), 5).toString());
+					
+					try {
+						moto.setCilindrada(Integer.parseInt(table_Moto.getModel().getValueAt(table_Moto.getSelectedRow(), 6).toString()));
+					} catch (Exception ex) {
+						moto.setCilindrada(0);
+					}
+					
+					try {
+						moto.setTanque(Integer.parseInt(table_Moto.getModel().getValueAt(table_Moto.getSelectedRow(), 7).toString()));
+					} catch (Exception ex) {
+						moto.setTanque(0);
+					}
+					
+					try {
+						moto.setPreco(Float.parseFloat(table_Moto.getModel().getValueAt(table_Moto.getSelectedRow(), 8).toString()));
+					} catch (Exception ex) {
+						moto.setPreco(0);
+					}
+					
+					MotoManter motoManter = new MotoManter(moto);
+					
+					motoManter.setLocationRelativeTo(null);
+					
+					motoManter.setVisible(true);
 				}
 				
-				carro.setCambio(table.getModel().getValueAt(table.getSelectedRow(), 7).toString());
-				
-				try {
-					carro.setPreco(Float.parseFloat(table.getModel().getValueAt(table.getSelectedRow(), 8).toString()));
-				} catch (Exception ex) {
-					carro.setPreco(0);
-				}
-				
-				CarroManter carroManter = new CarroManter(carro);
-				
-				carroManter.setLocationRelativeTo(null);
-				
-				carroManter.setVisible(true);
 				
 			}
 		});
@@ -228,19 +283,36 @@ public class Principal extends JFrame {
 		mnNewMenu_Excluir.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
-				Carro carro = new Carro();
-				
-				carro.setId(Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 0).toString()));
-				
-				try {
-					CarroDAO.excluir(carro);
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			
+				// tabbedPane = 0 -> Carro e 1 -> Moto
+				if ( tabbedPane.getSelectedIndex() == 0 ) {				
+					Carro carro = new Carro();
+					
+					carro.setId(Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 0).toString()));
+					
+					try {
+						CarroDAO.excluir(carro);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					carroAtualizar();
 				}
-				
-				carroAtualizar();
+				else {
+					Moto moto = new Moto();
+					
+					moto.setId(Integer.parseInt(table_Moto.getModel().getValueAt(table_Moto.getSelectedRow(), 0).toString()));
+					
+					try {
+						MotoDAO.excluir(moto);
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					motoAtualizar();
+				}
 				
 			}
 		});
@@ -272,13 +344,26 @@ public class Principal extends JFrame {
 			public void keyReleased(KeyEvent e) {
 				
 				String text = txtPesquisa.getText();
+							
+				// tabbedPane = 0 -> Carro e 1 -> Moto
+				if ( tabbedPane.getSelectedIndex() == 0 ) {
 				
-		        if (text.length() == 0) {
-		          sorter_Carro.setRowFilter(null);
-		        } else {
-		          sorter_Carro.setRowFilter(RowFilter.regexFilter("(?i)" + text, cbPesquisa_Carro.getSelectedIndex()));
-		          
-		        }
+			        if (text.length() == 0) {
+			          sorter_Carro.setRowFilter(null);
+			        } else {
+			          sorter_Carro.setRowFilter(RowFilter.regexFilter("(?i)" + text, cbPesquisa_Carro.getSelectedIndex()));
+			          
+			        }
+				}
+				else {
+				
+			        if (text.length() == 0) {
+			          sorter_Moto.setRowFilter(null);
+			        } else {
+			          sorter_Moto.setRowFilter(RowFilter.regexFilter("(?i)" + text, cbPesquisa_Moto.getSelectedIndex()));
+			          
+			        }
+				}
 				
 			}
 		});
@@ -317,6 +402,12 @@ public class Principal extends JFrame {
 	public static void carroAtualizar() {
 		
 		Carro.table_lista(modeloCarro);		
+		
+	}
+	
+	public static void motoAtualizar() {
+		
+		Moto.table_lista(modeloMoto);		
 		
 	}
 	

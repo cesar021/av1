@@ -147,6 +147,8 @@ public class Moto {
 
     	String[] itens = { "ID", "Chassi", "Montadora", "Modelo", "Tipo", "Cor", "Cilindrada", "Tanque", "Preço" };
     	
+    	
+    	
 		if (combo != null) {
     		
     		combo.removeAllItems();
@@ -165,7 +167,14 @@ public class Moto {
     public static void table_lista(DefaultTableModel modelo) {
 
 		MotoDAO motoDAO = new MotoDAO();
-				
+
+
+		for ( int r = modelo.getRowCount()-1; r > -1 ; r-- ) {
+    		
+    		modelo.removeRow(r);
+    		
+    	}
+		
 		ArrayList<Moto> lista;
 		try {
 			lista = motoDAO.listar();

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import br.com.infnet.loja.Carro;
 import br.com.infnet.loja.Moto;
 import br.com.infnet.loja.jdbc.FabricaDeConexoes;
 
@@ -18,10 +19,11 @@ public class MotoDAO {
 	/*** Métodos ***/
 
 	// Adicionar Moto
-	public void adicionarMoto() throws Exception {
+	public static void adicionarMoto(Moto moto) throws Exception {
 
+		/*
 		Moto moto = new Moto();
-
+		
 		System.out.println("Entre com o modelo do chassi: ");
 		String chassi = input.nextLine();
 
@@ -45,6 +47,8 @@ public class MotoDAO {
 
 		System.out.println("Entre com o preço: ");
 		float preco = input.nextFloat();
+		
+		
 
 		moto.setChassi(chassi);
 		moto.setMontadora(montadora);
@@ -55,6 +59,8 @@ public class MotoDAO {
 		moto.setTanque(tanque);
 		moto.setPreco(preco);
 
+	*/
+		
 		// adicionando no banco
 
 		if (moto != null) {
@@ -133,6 +139,61 @@ public class MotoDAO {
 		return retorno;
 	}
 
-	
+	public static void atualizar(Moto moto) throws Exception {
+		
+
+		try {
+			
+			Connection con = FabricaDeConexoes.conectar();
+			String sql="UPDATE estoque_motos SET "
+					+ "chassi=?, montadora=?, modelo=?, tipo=?, cor=?, cilindrada=?, tanque=?, preco=?"
+					+ "WHERE id =?";
+			PreparedStatement ps =  con.prepareStatement(sql);
+			
+			ps.setString(1, moto.getChassi());
+			ps.setString(2, moto.getMontadora());
+			ps.setString(3, moto.getModelo());
+			ps.setString(4, moto.getTipo());
+			ps.setString(5, moto.getCor());
+			ps.setFloat(6, moto.getCilindrada());
+			ps.setInt(7, moto.getTanque());
+			ps.setFloat(8, moto.getPreco());
+			
+			ps.setInt(9, moto.getId());
+			ps.executeUpdate();
+			
+
+		} catch (SQLException sqle) {
+			throw new Exception("Erro ao atualizar dados!" + sqle);
+		}
+		finally{
+			FabricaDeConexoes.desconectar();
+		}
+
+	}
+
+
+//Excluir moto
+	public static void excluir(Moto moto) throws Exception {
+
+		if (moto == null) {
+			throw new Exception("O valor passado nao pode ser nulo");
+		}
+		try {
+
+			Connection con = FabricaDeConexoes.conectar();
+			String sql = ("DELETE FROM estoque_motos WHERE ID=?");
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, moto.getId());
+			ps.executeUpdate();
+
+		} catch (Exception e) {
+			System.out.println("Erro ao excluir" + e);
+		} finally {
+			FabricaDeConexoes.desconectar();
+		}
+
+	}
+
 	
 }//class
