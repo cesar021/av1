@@ -56,6 +56,8 @@ public class Principal extends JFrame {
 	
 	public Principal() {
 		
+		
+		
 		setTitle("PRINCIPAL");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 790, 568);
@@ -162,12 +164,60 @@ public class Principal extends JFrame {
 		getContentPane().add(menuBar);
 		
 		JMenu mnNewMenu_Cadastrar = new JMenu("Cadastrar");
+		mnNewMenu_Cadastrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				CarroManter carroManter = new CarroManter(null);
+				
+				carroManter.setLocationRelativeTo(null);
+				
+				carroManter.setVisible(true);
+				
+				
+			}
+		});
 		
 		mnNewMenu_Cadastrar.setPreferredSize(new Dimension(120,0 ));
 		
 		menuBar.add(mnNewMenu_Cadastrar);
 		
 		JMenu mnNewMenu_Alterar = new JMenu("Alterar");
+		mnNewMenu_Alterar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				Carro carro = new Carro();
+				
+				carro.setId(Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 0).toString()));
+				carro.setChassi(table.getModel().getValueAt(table.getSelectedRow(), 1).toString());
+				carro.setMontadora(table.getModel().getValueAt(table.getSelectedRow(), 2).toString());
+				carro.setModelo(table.getModel().getValueAt(table.getSelectedRow(), 3).toString());
+				carro.setTipo(table.getModel().getValueAt(table.getSelectedRow(), 4).toString());
+				carro.setCor(table.getModel().getValueAt(table.getSelectedRow(), 5).toString());
+				
+				try {
+					carro.setMotorizacao(Float.parseFloat(table.getModel().getValueAt(table.getSelectedRow(), 6).toString()));
+				} catch (Exception ex) {
+					carro.setMotorizacao(0);
+				}
+				
+				carro.setCambio(table.getModel().getValueAt(table.getSelectedRow(), 7).toString());
+				
+				try {
+					carro.setPreco(Float.parseFloat(table.getModel().getValueAt(table.getSelectedRow(), 8).toString()));
+				} catch (Exception ex) {
+					carro.setPreco(0);
+				}
+				
+				CarroManter carroManter = new CarroManter(carro);
+				
+				carroManter.setLocationRelativeTo(null);
+				
+				carroManter.setVisible(true);
+				
+			}
+		});
 		
 		mnNewMenu_Alterar.setPreferredSize(new Dimension(120,0 ));
 		
@@ -242,6 +292,12 @@ public class Principal extends JFrame {
 		});
 		
 
+	}
+	
+	public static void carroAtualizar() {
+		
+		Carro.table_lista(modeloCarro);		
+		
 	}
 	
 	public static void main(String[] args) {

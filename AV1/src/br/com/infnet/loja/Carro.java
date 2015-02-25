@@ -173,6 +173,12 @@ public class Carro {
 
     	CarroDAO carroDAO = new CarroDAO();
 		
+    	for ( int r = modelo.getRowCount()-1; r > -1 ; r-- ) {
+    		
+    		modelo.removeRow(r);
+    		
+    	}
+    	
 		ArrayList<Carro> lista;
 		try {
 			lista = carroDAO.listar();
