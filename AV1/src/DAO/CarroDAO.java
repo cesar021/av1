@@ -20,7 +20,7 @@ public class CarroDAO {
 	// *** metodos ****//
 	Carro carro = new Carro();
 	// Adicionar Carro
-	public static void adicionarCarro(Carro carro) throws Exception {
+	public void adicionarCarro(Carro carro) throws Exception {
 
 
 		// Adicinando ao banco
@@ -45,7 +45,7 @@ public class CarroDAO {
 
 				ps.executeUpdate();
 				
-				//JOptionPane.showMessageDialog(null,"Inserido com sucesso!");
+				JOptionPane.showMessageDialog(null,"Inserido com sucesso!");
 
 			} catch (SQLException e) {
 
@@ -164,9 +164,8 @@ public class CarroDAO {
 		return carro;
 	}
 
-	public static void atualizar(Carro carro) throws Exception {
+	public void atualizar(Carro carro) throws Exception {
 		
-		/*
 		System.out.println("Entre com o id a ser atualizado");
 		int id = input.nextInt();
 		
@@ -205,7 +204,6 @@ public class CarroDAO {
 		carro.setPreco(preco);
 		carro.setId(id);
 		
-		*/
 		try {
 			
 			Connection con = FabricaDeConexoes.conectar();
