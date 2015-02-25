@@ -100,7 +100,7 @@ public class CarroDAO {
 	}
 
 	// Excluir carro
-	public void excluir(Carro carro) throws Exception {
+	public static void excluir(Carro carro) throws Exception {
 
 		if (carro == null) {
 			throw new Exception("O valor passado nao pode ser nulo");
@@ -112,9 +112,6 @@ public class CarroDAO {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, carro.getId());
 			ps.executeUpdate();
-			
-			
-			
 
 		} catch (Exception e) {
 			System.out.println("Erro ao excluir" + e);

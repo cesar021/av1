@@ -10,6 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
+import DAO.CarroDAO;
 import br.com.infnet.loja.Carro;
 import br.com.infnet.loja.Moto;
 
@@ -224,6 +225,25 @@ public class Principal extends JFrame {
 		menuBar.add(mnNewMenu_Alterar);
 		
 		JMenu mnNewMenu_Excluir = new JMenu("Excluir");
+		mnNewMenu_Excluir.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				Carro carro = new Carro();
+				
+				carro.setId(Integer.parseInt(table.getModel().getValueAt(table.getSelectedRow(), 0).toString()));
+				
+				try {
+					CarroDAO.excluir(carro);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				carroAtualizar();
+				
+			}
+		});
 		
 		mnNewMenu_Excluir.setPreferredSize(new Dimension(120,0 ));
 		

@@ -76,7 +76,7 @@ public class CarroManter extends JDialog {
 					}
 					
 				}
-				// Caso objeto não seja null é alteração
+				// Caso objeto carro não seja null é alteração
 				else {
 					
 					carro.setChassi(txtChassi.getText());
@@ -87,7 +87,6 @@ public class CarroManter extends JDialog {
 					carro.setMotorizacao(Float.parseFloat(txtMotorizacao.getText()));
 					carro.setCambio(txtCambio.getText());
 					carro.setPreco(Float.parseFloat(txtPreco.getText()));
-
 					
 					try {
 						CarroDAO.atualizar(carro);
