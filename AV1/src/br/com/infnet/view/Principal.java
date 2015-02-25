@@ -13,6 +13,7 @@ import javax.swing.table.TableRowSorter;
 import br.com.infnet.loja.Carro;
 import br.com.infnet.loja.Moto;
 
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
@@ -34,6 +35,14 @@ import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+import javax.swing.ImageIcon;
+
 public class Principal extends JFrame {
 
 	private static DefaultTableModel modeloCarro = new DefaultTableModel();
@@ -54,7 +63,7 @@ public class Principal extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(12, 13, 752, 378);
+		tabbedPane.setBounds(12, 60, 752, 331);
 		getContentPane().add(tabbedPane);
 		
 		JPanel panel_Carros = new JPanel();
@@ -147,6 +156,42 @@ public class Principal extends JFrame {
 		Moto.table_lista(modeloMoto);
 		
 		Carro.table_modelo(modeloCarro, cbPesquisa_Carro);
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 772, 41);
+		getContentPane().add(menuBar);
+		
+		JMenu mnNewMenu_Cadastrar = new JMenu("Cadastrar");
+		
+		mnNewMenu_Cadastrar.setPreferredSize(new Dimension(120,0 ));
+		
+		menuBar.add(mnNewMenu_Cadastrar);
+		
+		JMenu mnNewMenu_Alterar = new JMenu("Alterar");
+		
+		mnNewMenu_Alterar.setPreferredSize(new Dimension(120,0 ));
+		
+		menuBar.add(mnNewMenu_Alterar);
+		
+		JMenu mnNewMenu_Excluir = new JMenu("Excluir");
+		
+		mnNewMenu_Excluir.setPreferredSize(new Dimension(120,0 ));
+		
+		menuBar.add(mnNewMenu_Excluir);
+		
+		JMenu mnNewMenu_Sair = new JMenu("Sair");
+		
+		mnNewMenu_Sair.setPreferredSize(new Dimension(120,0 ));
+		
+		mnNewMenu_Sair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				System.exit(DISPOSE_ON_CLOSE);;
+				
+			}
+		});
+		menuBar.add(mnNewMenu_Sair);
 		
 		Carro.table_lista(modeloCarro);
 		
